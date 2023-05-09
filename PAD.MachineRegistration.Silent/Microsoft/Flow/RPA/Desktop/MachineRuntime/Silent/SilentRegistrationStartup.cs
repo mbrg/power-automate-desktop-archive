@@ -25,7 +25,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 
 		protected override void SetupLogging()
 		{
-			LoggingManager.Initialize(PadLogCategory.SilentRegistration, Component.SilentRegistrationApp, Guid.NewGuid().ToString(), null, null, false);
+			LoggingManager.Initialize(PadLogCategory.SilentRegistration, Component.SilentRegistrationApp, Guid.NewGuid().ToString(), null, null, null, null, null, null, null, null, null, false, false);
 		}
 
 

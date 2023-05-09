@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using CommonServiceLocator;
 using Microsoft.Flow.RPA.Desktop.Common.Services.Registry;
 using Microsoft.Flow.RPA.Desktop.Console.Application.Services;
-using Microsoft.Flow.RPA.Desktop.Console.Core.ApplicationRoot;
 using Microsoft.Flow.RPA.Desktop.Console.Core.UserAccount;
+using Microsoft.Flow.RPA.Desktop.MachineRuntime.Core.ApplicationRoot;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.SilentRegistrationCommandParameters;
-using Microsoft.Flow.RPA.Desktop.Shared.Clients.TenantDiscovery.Entities;
+using Microsoft.Flow.RPA.Desktop.Shared.Common.CloudInfoEntities;
 using Microsoft.Flow.RPA.Desktop.Shared.Common.Enums;
 using Microsoft.Flow.RPA.Desktop.Shared.Localization.Properties;
 using Microsoft.Flow.RPA.Desktop.Shared.Logging;
@@ -29,7 +29,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 		private static async Task Main(string[] args)
 		{
 			SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-			new SilentRegistrationStartup().Intialize();
+			new SilentRegistrationStartup().Intialize(new SynchronizationContextDispatcher(SynchronizationContext.Current));
 			try
 			{
 				Program._logger = LoggingManager.CreateLogger<Program>(null);
@@ -113,7 +113,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 		private static async Task PerformRegistrationWorkAsync(SilentRegistrationCommands silentRegistrationCommands)
 		{
 			ISilentRegistrationOperations silentRegistrationOperations = ServiceLocator.Current.GetInstance<ISilentRegistrationOperations>();
-			if (silentRegistrationCommands.OperationToExecute != SilentRegistrationOperationType.RegisterHosted && silentRegistrationCommands.OperationToExecute != SilentRegistrationOperationType.AADJoin)
+			if (silentRegistrationCommands.OperationToExecute != SilentRegistrationOperationType.RegisterHosted && silentRegistrationCommands.OperationToExecute != SilentRegistrationOperationType.RegisterRpaBox && silentRegistrationCommands.OperationToExecute != SilentRegistrationOperationType.AADJoin)
 			{
 				Program.SetupAuthenticationService(silentRegistrationCommands);
 				await silentRegistrationOperations.TryLogonAsync(silentRegistrationCommands.GetAuthenticationFallback()).ConfigureAwait(false);
@@ -169,6 +169,9 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			case SilentRegistrationOperationType.Recover:
 				await silentRegistrationOperations.RecoverMachineAsync().ConfigureAwait(false);
 				return;
+			case SilentRegistrationOperationType.RegisterRpaBox:
+				await silentRegistrationOperations.RegisterRpaBoxAsync(silentRegistrationCommands.GetB64SerializedRegisterRpaBoxRequest()).ConfigureAwait(false);
+				return;
 			}
 			SilentRegistrationCommands.DisplayUsage(true);
 			throw new SilentRegistrationException(SilentRegistrationErrorCodes.OperationNotSupported.ToString(), string.Format("Invalid operation '{0}' to execute. See -help above.", silentRegistrationCommands.OperationToExecute), null);
@@ -213,7 +216,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			string text5;
 			silentRegistrationCommands.TryGetUsernameParameter(out text5);
 			text5 = text5 ?? string.Empty;
-			IUserAccountInfo userAccountInfo = ServiceLocator.Current.GetInstance<IConsoleRoot>().UserAccountInfo;
+			IUserAccountInfo userAccountInfo = ServiceLocator.Current.GetInstance<IMachineRuntimeRoot>().UserAccountInfo;
 			string text6 = text5;
 			string text7 = text5;
 			string empty = string.Empty;

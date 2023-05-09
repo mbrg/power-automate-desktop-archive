@@ -4,12 +4,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 
-[assembly: AssemblyVersion("2.23.184.22217")]
+[assembly: AssemblyVersion("2.25.196.22312")]
 [assembly: AssemblyCompany("Microsoft")]
 [assembly: AssemblyConfiguration("Release")]
 [assembly: AssemblyCopyright("Copyright (C) Microsoft Corporation. All rights reserved.")]
 [assembly: AssemblyDescription("PAD.MachineRegistration.Silent")]
-[assembly: AssemblyFileVersion("2.23.184.22217")]
-[assembly: AssemblyInformationalVersion("2.23.00184.22217")]
+[assembly: AssemblyFileVersion("2.25.196.22312")]
+[assembly: AssemblyInformationalVersion("2.25.00196.22312")]
 [assembly: AssemblyProduct("Power Automate")]
 [assembly: AssemblyTitle("PAD.MachineRegistration.Silent")]

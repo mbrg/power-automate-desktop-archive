@@ -24,6 +24,8 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.SilentRegistrationCom
 
 		AADJoin,
 
-		Recover
+		Recover,
+
+		RegisterRpaBox
 	}
 }

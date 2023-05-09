@@ -76,6 +76,10 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 
 		AADJoin,
 
-		Recover
+		Recover,
+
+		RegisterRpaBox,
+
+		RegisterRpaBoxB64SerializedRequest
 	}
 }
