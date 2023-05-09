@@ -14,8 +14,8 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 	public class SilentRegistrationCommands
 	{
 
-		// (get) Token: 0x0600000A RID: 10 RVA: 0x000023FC File Offset: 0x000005FC
-		// (set) Token: 0x0600000B RID: 11 RVA: 0x00002404 File Offset: 0x00000604
+
+
 		public SilentRegistrationOperationType OperationToExecute { get; private set; }
 
 

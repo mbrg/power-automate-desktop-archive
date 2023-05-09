@@ -30,8 +30,8 @@ namespace PAD.MachineRegistration.Silent.AADJoin.Entities
 		}
 
 
-		// (get) Token: 0x060000C0 RID: 192 RVA: 0x000051FB File Offset: 0x000033FB
-		// (set) Token: 0x060000C1 RID: 193 RVA: 0x00005203 File Offset: 0x00003403
+
+
 		public string ErrorCode { get; set; }
 	}
 }

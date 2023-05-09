@@ -8,11 +8,11 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 	public class AADJoinDeviceOperationException : Exception
 	{
 
-		// (get) Token: 0x06000047 RID: 71 RVA: 0x00003B3A File Offset: 0x00001D3A
+
 		public string ErrorCode { get; }
 
 
-		// (get) Token: 0x06000048 RID: 72 RVA: 0x00003B42 File Offset: 0x00001D42
+
 		public AADDeviceJoinInfo DeviceJoinInfo { get; }
 
 
