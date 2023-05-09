@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{96F1FFDF-C84D-48E1-9E66-94E5211D7D0E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAD.MachineRegistration.Silent</RootNamespace>
+    <AssemblyName>PAD.MachineRegistration.Silent</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>PAD.MachineRegistration.Silent.ico</ApplicationIcon>
+    <StartupObject>Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\programfiles\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator">
+      <HintPath>..\..\programfiles\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR">
+      <HintPath>..\..\programfiles\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Common.Services.HttpClients">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Common.Services.HttpClients.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Common.Services.Registry">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Common.Services.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Common.Structures">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Common.Structures.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Console.Application">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Console.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Console.Core">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Console.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Console.Persistence">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Console.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.MachineRuntime.Application">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.MachineRuntime.Application.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.MachineRuntime.Common">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.MachineRuntime.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.MachineRuntime.Core">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.MachineRuntime.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Clients">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Clients.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Clients.Common">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Clients.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Common">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Common.Extensions">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Common.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Localization">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Logging">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Logging.Common">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Logging.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.MsAccountAuthenticator">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.MsAccountAuthenticator.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Services">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.Shared.Telemetry.Instrumentation">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.Shared.Telemetry.Instrumentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.Desktop.UIFlowService">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.Desktop.UIFlowService.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPA.RegistrationContract">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPA.RegistrationContract.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPAPAD.Shared.Data">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPAPAD.Shared.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPAPAD.Shared.NamedPipe">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPAPAD.Shared.NamedPipe.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Flow.RPAPAD.Shared.Telemetry">
+      <HintPath>..\..\programfiles\Microsoft.Flow.RPAPAD.Shared.Telemetry.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client">
+      <HintPath>..\..\programfiles\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\programfiles\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AADJoin\DeviceInfoUtil.cs" />
+    <Compile Include="AADJoin\Entities\AADDeviceJoinInfo.cs" />
+    <Compile Include="AADJoin\Entities\AADDevicePreprovisioningInfo.cs" />
+    <Compile Include="AADJoin\Entities\NativeAPIException.cs" />
+    <Compile Include="AADJoin\IDeviceInfoUtil.cs" />
+    <Compile Include="AADJoin\NativeMethods.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Authentication\SilentRegistrationAuthenticationFallbackType.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Authentication\SilentRegistrationTokenProvider.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\AADJoinDeviceOperation.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\AADJoinDeviceOperationCode.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\AADJoinDeviceOperationException.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\AADJoinDeviceOperationResult.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\IAADJoinDeviceOperation.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\IRegisterHostedMachineOperation.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\ISilentRegistrationOperations.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\PasswordStrengthHelper.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\RegisterHostedMachineOperation.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\RegisterHostedMachineOperationException.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Operations\SilentRegistrationOperations.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\Program.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationCommandParameters\SilentRegistrationFormatType.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationCommandParameters\SilentRegistrationOperationType.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationCommands.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationErrorCodes.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationException.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationParameter.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationParameterType.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\SilentRegistrationStartup.cs" />
+    <Compile Include="Microsoft\Flow\RPA\Desktop\MachineRuntime\Silent\UIFlowService\SilentRegistrationUIFlowServicePipe.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvisioningServiceClient\AADJoinHostedMachineRequest.cs" />
+    <Compile Include="ProvisioningServiceClient\AADJoinHostedMachineResponse.cs" />
+    <Compile Include="ProvisioningServiceClient\IProvisioningServiceClient.cs" />
+    <Compile Include="ProvisioningServiceClient\ProvisioningServiceClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
