@@ -11,16 +11,16 @@ using PAD.MachineRegistration.Silent.AADJoin.Entities;
 
 namespace PAD.MachineRegistration.Silent.AADJoin
 {
-	// Token: 0x0200001D RID: 29
+
 	public class DeviceInfoUtil : IDeviceInfoUtil
 	{
-		// Token: 0x0600009E RID: 158 RVA: 0x00004CA0 File Offset: 0x00002EA0
+
 		public DeviceInfoUtil(ILogger<DeviceInfoUtil> logger)
 		{
 			this.logger = logger;
 		}
 
-		// Token: 0x0600009F RID: 159 RVA: 0x00004CB0 File Offset: 0x00002EB0
+
 		public bool UnjoinDevice()
 		{
 			this.logger.Info("UnjoinDevice", LogEvent.MachineRegistration.AADJoin.Start, "UnjoinDevice start.", -1L, Array.Empty<LogData>());
@@ -33,13 +33,13 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			throw new NativeAPIException(this.FormatErrorCode(num), "AADRT AadUnjoinDevice API return error code");
 		}
 
-		// Token: 0x060000A0 RID: 160 RVA: 0x00004D2F File Offset: 0x00002F2F
+
 		public bool IsDeviceAADJoined()
 		{
 			return this.GetDeviceJoinState() != null;
 		}
 
-		// Token: 0x060000A1 RID: 161 RVA: 0x00004D3C File Offset: 0x00002F3C
+
 		public AADDeviceJoinInfo GetDeviceJoinState()
 		{
 			this.logger.Info("GetDeviceJoinState", LogEvent.MachineRegistration.AADJoin.Start, "Start Get Device Join State with AAD Runtime.", -1L, Array.Empty<LogData>());
@@ -84,7 +84,7 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			}).GetAwaiter().GetResult();
 		}
 
-		// Token: 0x060000A2 RID: 162 RVA: 0x00004DB0 File Offset: 0x00002FB0
+
 		public AADDevicePreprovisioningInfo GetDevicePreprovisioningBlob(string tenantId, string correlationId)
 		{
 			if (string.IsNullOrEmpty(tenantId))
@@ -119,7 +119,7 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			}).GetAwaiter().GetResult();
 		}
 
-		// Token: 0x060000A3 RID: 163 RVA: 0x00004E88 File Offset: 0x00003088
+
 		public bool JoinPreprovisionedDevice(string joinCookie, string joinChallenge, string tenantId, string correlationId)
 		{
 			if (string.IsNullOrEmpty(tenantId) || string.IsNullOrEmpty(joinCookie) || string.IsNullOrEmpty(joinChallenge))
@@ -164,25 +164,25 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			throw new Exception("Unreachable code");
 		}
 
-		// Token: 0x060000A4 RID: 164 RVA: 0x00005024 File Offset: 0x00003224
+
 		public void AadMaintenanceTasks()
 		{
 			NativeMethods.AadMaintenanceTasks();
 		}
 
-		// Token: 0x060000A5 RID: 165 RVA: 0x0000502C File Offset: 0x0000322C
+
 		protected virtual int AadJoinPreprovisionedDevice(string joinCookie, string joinChallenge, string tenantId, string correlationId)
 		{
 			return NativeMethods.AadJoinPreprovisionedDevice(joinCookie, joinChallenge, tenantId, correlationId, NativeMethods.AADRT_JOIN_FLAGS.AADRT_JF_NONE);
 		}
 
-		// Token: 0x060000A6 RID: 166 RVA: 0x00005039 File Offset: 0x00003239
+
 		private string FormatErrorCode(int code)
 		{
 			return "0x" + code.ToString("X");
 		}
 
-		// Token: 0x060000A7 RID: 167 RVA: 0x00005054 File Offset: 0x00003254
+
 		private async Task<T> aadrtRetryPolicy<T>(string name, Func<T> action)
 		{
 			int num;
@@ -220,7 +220,7 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			throw new Exception("Unreachable code.");
 		}
 
-		// Token: 0x060000A8 RID: 168 RVA: 0x000050A8 File Offset: 0x000032A8
+
 		public bool Init()
 		{
 			if (!NativeMethods.IsAadrtAvailable())
@@ -238,16 +238,16 @@ namespace PAD.MachineRegistration.Silent.AADJoin
 			return false;
 		}
 
-		// Token: 0x040000A1 RID: 161
+
 		private const int MaxRetryCount = 7;
 
-		// Token: 0x040000A2 RID: 162
+
 		private const int MaxCommonRetryCount = 3;
 
-		// Token: 0x040000A3 RID: 163
+
 		private const double CommonRetryBaseTime = 1.5;
 
-		// Token: 0x040000A4 RID: 164
+
 		private readonly ILogger<DeviceInfoUtil> logger;
 	}
 }

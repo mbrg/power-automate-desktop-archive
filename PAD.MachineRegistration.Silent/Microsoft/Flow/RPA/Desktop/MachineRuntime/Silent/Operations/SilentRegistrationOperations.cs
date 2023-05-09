@@ -39,10 +39,10 @@ using Newtonsoft.Json;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 {
-	// Token: 0x02000016 RID: 22
+
 	public class SilentRegistrationOperations : ISilentRegistrationOperations
 	{
-		// Token: 0x06000069 RID: 105 RVA: 0x00003DE8 File Offset: 0x00001FE8
+
 		public SilentRegistrationOperations(IUnitOfWork unitOfWork, IMediator mediator, IStorageTypeService storageTypeService, IMachineRegistrationManager machineRegistrationManager, ILoggerContext loggerContext, ICdsClient cdsClient, IMachineManagementCdsClient machineManagementCdsClient, ITokenProvider tokenProvider, IMicrosoftAuthenticationServiceManager microsoftAuthenticationServiceManager, IConsoleRoot consoleRoot, IRegistryValuesService registryValuesService, ILogger<SilentRegistrationOperations> logger, IRegisterHostedMachineOperation registerHostedMachineOperation, IAADJoinDeviceOperation aadJoinDeviceOperation)
 		{
 			this._environmentsRepositoryProxy = unitOfWork.Environments;
@@ -61,7 +61,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			storageTypeService.Set(StorageType.Cds);
 		}
 
-		// Token: 0x0600006A RID: 106 RVA: 0x00003E74 File Offset: 0x00002074
+
 		public async Task TryLogonAsync(SilentRegistrationAuthenticationFallbackType silentRegistrationAuthenticationFallbackType)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass22_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass22_0();
@@ -70,7 +70,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("TryLogonAsync", new Func<Task>(CS$<>8__locals1.<TryLogonAsync>g__TryLogonInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x0600006B RID: 107 RVA: 0x00003EC0 File Offset: 0x000020C0
+
 		public async Task JoinMachineGroupAsync(Guid groupId, SecureString password)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass23_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass23_0();
@@ -90,7 +90,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("JoinMachineGroupAsync", new Func<Task>(CS$<>8__locals1.<JoinMachineGroupAsync>g__JoinMachineGroupInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x0600006C RID: 108 RVA: 0x00003F14 File Offset: 0x00002114
+
 		public async Task RegisterMachineAsync(string machineName, string machineDescription, bool overrideExistingRegistration)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass24_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass24_0();
@@ -101,7 +101,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("RegisterMachineAsync", new Func<Task>(CS$<>8__locals1.<RegisterMachineAsync>g__RegisterMachineInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x0600006D RID: 109 RVA: 0x00003F70 File Offset: 0x00002170
+
 		public async Task RegisterHostedMachineAsync(Uri serviceUri, string vmResourceId, SecureString miAuthToken, SecureString groupPassword, string machineName, string machineDescription)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass25_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass25_0();
@@ -115,7 +115,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("RegisterHostedMachineAsync", new Func<Task>(CS$<>8__locals1.<RegisterHostedMachineAsync>g__RegisterHostedMachineInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x0600006E RID: 110 RVA: 0x00003FE8 File Offset: 0x000021E8
+
 		public async Task AADJoinDeviceAsync(Uri serviceUri, SecureString miAuthToken, string vmResourceId, string tenantId)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass26_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass26_0();
@@ -127,13 +127,13 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("AADJoinDeviceAsync", new Func<Task>(CS$<>8__locals1.<AADJoinDeviceAsync>g__AADJoinDeviceInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x0600006F RID: 111 RVA: 0x0000404C File Offset: 0x0000224C
+
 		public async Task SetServicePlanDetailsAsync()
 		{
 			await this._logger.TraceOperationAsync("SetServicePlanDetailsAsync", new Func<Task>(this.<SetServicePlanDetailsAsync>g__SetServicePlanDetailsInternalAsync|27_0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000070 RID: 112 RVA: 0x00004090 File Offset: 0x00002290
+
 		public async Task SetCurrentEnvironmentAsync(SilentRegistrationOperationType operationType, string environmentId = null)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass28_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass28_0();
@@ -143,7 +143,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("SetCurrentEnvironmentAsync", new Func<Task>(CS$<>8__locals1.<SetCurrentEnvironmentAsync>g__SetCurrentEnvironmentInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000071 RID: 113 RVA: 0x000040E4 File Offset: 0x000022E4
+
 		public async Task GetStatusAsync(SilentRegistrationFormatType formatType)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass29_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass29_0();
@@ -152,19 +152,19 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await this._logger.TraceOperationAsync("GetStatusAsync", new Func<Task>(CS$<>8__locals1.<GetStatusAsync>g__GetStatusInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000072 RID: 114 RVA: 0x00004130 File Offset: 0x00002330
+
 		public async Task GetMachineRegistrationStateAsync()
 		{
 			await this._logger.TraceOperationAsync("GetMachineRegistrationStateAsync", new Func<Task>(this.<GetMachineRegistrationStateAsync>g__GetMachineRegistrationStateInternalAsync|30_0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000073 RID: 115 RVA: 0x00004174 File Offset: 0x00002374
+
 		public async Task RecoverMachineAsync()
 		{
 			await this._logger.TraceOperationAsync("RecoverMachineAsync", new Func<Task>(this.<RecoverMachineAsync>g__RecoverMachineInternalAsync|31_0), null, null, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000074 RID: 116 RVA: 0x000041B8 File Offset: 0x000023B8
+
 		private async Task<Guid> GetUserIdAsync()
 		{
 			Guid guid;
@@ -179,7 +179,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return guid;
 		}
 
-		// Token: 0x06000075 RID: 117 RVA: 0x000041FC File Offset: 0x000023FC
+
 		private async Task<CdsMachineGroupDto> GetMachineGroupAsync(Guid groupId)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass33_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass33_0();
@@ -197,7 +197,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return cdsMachineGroupDto;
 		}
 
-		// Token: 0x06000076 RID: 118 RVA: 0x00004248 File Offset: 0x00002448
+
 		private async Task JoinMachineGroupWithRetryAsync(Guid groupId, SecureString password, int attempt)
 		{
 			SilentRegistrationOperations.<>c__DisplayClass34_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass34_0();
@@ -222,7 +222,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			await CS$<>8__locals1.password.DecryptSecureStringAndUseResultAsStringAsync(new Func<string, Task>(CS$<>8__locals1.<JoinMachineGroupWithRetryAsync>g__UseUnsecureString|0));
 		}
 
-		// Token: 0x06000077 RID: 119 RVA: 0x000042A4 File Offset: 0x000024A4
+
 		private async Task TryFallbackLogonAsync(SilentRegistrationAuthenticationFallbackType silentRegistrationAuthenticationFallbackType)
 		{
 			CloudInfo cloudInfo = this._userAccountInfo.CloudInfo;
@@ -254,7 +254,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			}
 		}
 
-		// Token: 0x06000078 RID: 120 RVA: 0x000042F0 File Offset: 0x000024F0
+
 		private async Task CheckRelayConnectionStateAsync(SilentRegistrationOperationType operationType)
 		{
 			if (this._machineState == RegistrationState.Registered)
@@ -272,7 +272,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			}
 		}
 
-		// Token: 0x06000079 RID: 121 RVA: 0x0000433C File Offset: 0x0000253C
+
 		private static SilentRegistrationException ToSilentRegistrationException(CdsClientException cdsException)
 		{
 			StringBuilder stringBuilder = new StringBuilder();
@@ -287,7 +287,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return new SilentRegistrationException(SilentRegistrationErrorCodes.CdsError.ToString(), stringBuilder.ToString(), cdsException);
 		}
 
-		// Token: 0x0600007A RID: 122 RVA: 0x00004408 File Offset: 0x00002608
+
 		private static void HandleBaseMachineCommandsResult(BaseMachineCommandsResult result, string defaultMessage)
 		{
 			if (result.IsSuccess)
@@ -319,7 +319,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			throw new SilentRegistrationException(text, text2, result.UnexpectedException);
 		}
 
-		// Token: 0x0600007B RID: 123 RVA: 0x000044A8 File Offset: 0x000026A8
+
 		private void DisplayOnConsoleDefault(GetStatusResponse response, bool groupRetrieved)
 		{
 			string text = "\tError retrieving information" + System.Environment.NewLine;
@@ -418,7 +418,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			Console.WriteLine(stringBuilder.ToString());
 		}
 
-		// Token: 0x0600007C RID: 124 RVA: 0x00004704 File Offset: 0x00002904
+
 		private string GetDisplayableStringFromDictionnary(Dictionary<string, string> dict)
 		{
 			ValueTuple<int, int> maxLengths = this.GetMaxLengths(dict);
@@ -458,7 +458,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return stringBuilder.ToString();
 		}
 
-		// Token: 0x0600007D RID: 125 RVA: 0x000048A4 File Offset: 0x00002AA4
+
 		[return: TupleElementNames(new string[] { "maxKeyLength", "maxValueLength" })]
 		private ValueTuple<int, int> GetMaxLengths(Dictionary<string, string> dict)
 		{
@@ -476,7 +476,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return new ValueTuple<int, int>(num, num2);
 		}
 
-		// Token: 0x0600007E RID: 126 RVA: 0x0000493C File Offset: 0x00002B3C
+
 		[CompilerGenerated]
 		private async Task <SetServicePlanDetailsAsync>g__SetServicePlanDetailsInternalAsync|27_0()
 		{
@@ -486,7 +486,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			}
 		}
 
-		// Token: 0x0600007F RID: 127 RVA: 0x00004980 File Offset: 0x00002B80
+
 		[CompilerGenerated]
 		private async Task <GetMachineRegistrationStateAsync>g__GetMachineRegistrationStateInternalAsync|30_0()
 		{
@@ -500,14 +500,14 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			}
 		}
 
-		// Token: 0x06000080 RID: 128 RVA: 0x000049C4 File Offset: 0x00002BC4
+
 		[CompilerGenerated]
 		private async Task <RecoverMachineAsync>g__RecoverMachineInternalAsync|31_0()
 		{
 			SilentRegistrationOperations.HandleBaseMachineCommandsResult(await this._mediator.Send<RecoverMachineCommandResult>(new RecoverMachineCommand(this._currentOrgUri, this._currentEnvironment.Id), default(CancellationToken)), "Failed to recover machine in environment '" + this._currentEnvironment.Id + "'. Please retry or contact support.");
 		}
 
-		// Token: 0x06000081 RID: 129 RVA: 0x00004A08 File Offset: 0x00002C08
+
 		[CompilerGenerated]
 		private async Task<Guid> <GetUserIdAsync>g__GetUserIdInternalAsync|32_0()
 		{
@@ -515,74 +515,74 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return (await this._cdsClient.GetWhoAmIAsync(this._currentOrgUri, tokenProviderResultDto.Token, null, default(CancellationToken)).ConfigureAwait(false)).UserId;
 		}
 
-		// Token: 0x06000082 RID: 130 RVA: 0x00004A4B File Offset: 0x00002C4B
+
 		[CompilerGenerated]
 		internal static void <TryFallbackLogonAsync>g__DeviceCodeCallback|35_0(DeviceCodeResult deviceCodeResult)
 		{
 			Console.WriteLine(deviceCodeResult.Message);
 		}
 
-		// Token: 0x04000078 RID: 120
+
 		private const int MaxJoinMachineGroupAttempt = 3;
 
-		// Token: 0x04000079 RID: 121
+
 		private const string NullReadableString = "null";
 
-		// Token: 0x0400007A RID: 122
+
 		private Uri _currentOrgUri;
 
-		// Token: 0x0400007B RID: 123
+
 		private Microsoft.Flow.RPA.Desktop.Console.Core.Environment.Environment _currentEnvironment;
 
-		// Token: 0x0400007C RID: 124
+
 		private Microsoft.Flow.RPA.Desktop.Console.Core.Environment.Environment _currentRegisteredEnvironment;
 
-		// Token: 0x0400007D RID: 125
+
 		private RegistrationStatusResponse _currentRegistrationStatus;
 
-		// Token: 0x0400007E RID: 126
+
 		private RegistrationState _machineState;
 
-		// Token: 0x0400007F RID: 127
+
 		private Guid _currentMachineGroupId;
 
-		// Token: 0x04000080 RID: 128
+
 		private readonly IEnvironmentsRepositoryProxy _environmentsRepositoryProxy;
 
-		// Token: 0x04000081 RID: 129
+
 		private readonly IMediator _mediator;
 
-		// Token: 0x04000082 RID: 130
+
 		private readonly IMachineRegistrationManager _machineRegistrationManager;
 
-		// Token: 0x04000083 RID: 131
+
 		private readonly ILoggerContext _loggerContext;
 
-		// Token: 0x04000084 RID: 132
+
 		private readonly ICdsClient _cdsClient;
 
-		// Token: 0x04000085 RID: 133
+
 		private readonly IMachineManagementCdsClient _machineManagementCdsClient;
 
-		// Token: 0x04000086 RID: 134
+
 		private readonly ITokenProvider _tokenProvider;
 
-		// Token: 0x04000087 RID: 135
+
 		private readonly IMicrosoftAuthenticationServiceManager _microsoftAuthenticationServiceManager;
 
-		// Token: 0x04000088 RID: 136
+
 		private readonly IUserAccountInfo _userAccountInfo;
 
-		// Token: 0x04000089 RID: 137
+
 		private readonly IRegistryValuesService _registryValuesService;
 
-		// Token: 0x0400008A RID: 138
+
 		private readonly ILogger<SilentRegistrationOperations> _logger;
 
-		// Token: 0x0400008B RID: 139
+
 		private readonly IRegisterHostedMachineOperation _registerHostedMachineOperation;
 
-		// Token: 0x0400008C RID: 140
+
 		private readonly IAADJoinDeviceOperation _aadJoinDeviceOperation;
 	}
 }

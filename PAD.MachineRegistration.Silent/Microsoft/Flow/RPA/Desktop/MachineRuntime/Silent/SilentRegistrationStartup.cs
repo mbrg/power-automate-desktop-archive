@@ -13,22 +13,22 @@ using PAD.MachineRegistration.Silent.ProvisioningServiceClient;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 {
-	// Token: 0x02000008 RID: 8
+
 	public class SilentRegistrationStartup : MachineRegistrationStartup
 	{
-		// Token: 0x0600003B RID: 59 RVA: 0x000036AC File Offset: 0x000018AC
+
 		public void SetSilentRegistrationCommands(SilentRegistrationCommands silentRegistrationCommands)
 		{
 			this._silentRegistrationCommands = silentRegistrationCommands;
 		}
 
-		// Token: 0x0600003C RID: 60 RVA: 0x000036B8 File Offset: 0x000018B8
+
 		protected override void SetupLogging()
 		{
 			LoggingManager.Initialize(PadLogCategory.SilentRegistration, Component.SilentRegistrationApp, Guid.NewGuid().ToString(), null, null, false);
 		}
 
-		// Token: 0x0600003D RID: 61 RVA: 0x000036E4 File Offset: 0x000018E4
+
 		protected override void SetupAppSpecificIoC(ContainerBuilder builder)
 		{
 			builder.RegisterType<SilentRegistrationTokenProvider>().AsImplementedInterfaces<SilentRegistrationTokenProvider, ConcreteReflectionActivatorData>();
@@ -40,7 +40,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			builder.RegisterType<SilentRegistrationOperations>().AsImplementedInterfaces<SilentRegistrationOperations, ConcreteReflectionActivatorData>().SingleInstance();
 		}
 
-		// Token: 0x04000053 RID: 83
+
 		private SilentRegistrationCommands _silentRegistrationCommands;
 	}
 }

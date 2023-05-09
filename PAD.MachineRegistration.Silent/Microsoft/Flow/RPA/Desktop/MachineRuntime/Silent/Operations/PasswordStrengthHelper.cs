@@ -3,16 +3,16 @@ using System.Linq;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 {
-	// Token: 0x02000013 RID: 19
+
 	internal class PasswordStrengthHelper
 	{
-		// Token: 0x06000062 RID: 98 RVA: 0x00003C1A File Offset: 0x00001E1A
+
 		internal static bool AllCriteriasSatisfied(string password)
 		{
 			return PasswordStrengthHelper.PasswordCriteriasCount(password) == 4;
 		}
 
-		// Token: 0x06000063 RID: 99 RVA: 0x00003C28 File Offset: 0x00001E28
+
 		private static int PasswordCriteriasCount(string password)
 		{
 			bool[] array = new bool[4];

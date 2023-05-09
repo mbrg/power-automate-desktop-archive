@@ -10,15 +10,15 @@ using Microsoft.Flow.RPA.Desktop.Shared.Common.Enums;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 {
-	// Token: 0x02000003 RID: 3
+
 	public class SilentRegistrationCommands
 	{
-		// Token: 0x17000001 RID: 1
+
 		// (get) Token: 0x0600000A RID: 10 RVA: 0x000023FC File Offset: 0x000005FC
 		// (set) Token: 0x0600000B RID: 11 RVA: 0x00002404 File Offset: 0x00000604
 		public SilentRegistrationOperationType OperationToExecute { get; private set; }
 
-		// Token: 0x0600000C RID: 12 RVA: 0x00002410 File Offset: 0x00000610
+
 		public static void DisplayUsage(bool isError)
 		{
 			TextWriter textWriter = (isError ? Console.Error : Console.Out);
@@ -65,7 +65,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			textWriter.WriteLine();
 		}
 
-		// Token: 0x0600000D RID: 13 RVA: 0x00002658 File Offset: 0x00000858
+
 		public SilentRegistrationCommands(IEnumerable<string> parameters)
 		{
 			if (parameters == null || parameters.Count<string>() == 0)
@@ -85,7 +85,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			}
 		}
 
-		// Token: 0x0600000E RID: 14 RVA: 0x00002AC0 File Offset: 0x00000CC0
+
 		public SilentRegistrationFormatType GetFormatType()
 		{
 			SilentRegistrationFormatType silentRegistrationFormatType;
@@ -93,61 +93,61 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return silentRegistrationFormatType;
 		}
 
-		// Token: 0x0600000F RID: 15 RVA: 0x00002ADB File Offset: 0x00000CDB
+
 		public bool TryGetUsernameParameter(out string username)
 		{
 			return this.TryGetValue(SilentRegistrationParameterType.Username, out username);
 		}
 
-		// Token: 0x06000010 RID: 16 RVA: 0x00002AE5 File Offset: 0x00000CE5
+
 		public bool NeedForceRegistration()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.ForceRegistration).IsSet;
 		}
 
-		// Token: 0x06000011 RID: 17 RVA: 0x00002B16 File Offset: 0x00000D16
+
 		public string GetRegistrationMachineNameParameter()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.RegistrationMachineName).Values.FirstOrDefault<string>();
 		}
 
-		// Token: 0x06000012 RID: 18 RVA: 0x00002B4C File Offset: 0x00000D4C
+
 		public string GetRegistrationMachineDescriptionParameter()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.RegistrationMachineDescription).Values.FirstOrDefault<string>();
 		}
 
-		// Token: 0x06000013 RID: 19 RVA: 0x00002B82 File Offset: 0x00000D82
+
 		public string GetEnvironmentIdentifier()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.EnvironmentIdentifier).Values.FirstOrDefault<string>();
 		}
 
-		// Token: 0x06000014 RID: 20 RVA: 0x00002BB8 File Offset: 0x00000DB8
+
 		public string GetTenantIdentifier()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.TenantIdentifier).Values.FirstOrDefault<string>();
 		}
 
-		// Token: 0x06000015 RID: 21 RVA: 0x00002BEE File Offset: 0x00000DEE
+
 		public bool TryGetApplicationIdentifier(out string appId)
 		{
 			return this.TryGetValue(SilentRegistrationParameterType.ApplicationIdentifier, out appId);
 		}
 
-		// Token: 0x06000016 RID: 22 RVA: 0x00002BF9 File Offset: 0x00000DF9
+
 		public bool TryGetApplicationSecret(out SecureString appSecret)
 		{
 			return this.TryGetSecureValue(SilentRegistrationParameterType.ApplicationSecret, out appSecret);
 		}
 
-		// Token: 0x06000017 RID: 23 RVA: 0x00002C04 File Offset: 0x00000E04
+
 		public bool TryGetApplicationCertificateThumbprint(out string appCertThumbprint)
 		{
 			return this.TryGetValue(SilentRegistrationParameterType.ApplicationCertificateThumbprint, out appCertThumbprint);
 		}
 
-		// Token: 0x06000018 RID: 24 RVA: 0x00002C10 File Offset: 0x00000E10
+
 		public SilentRegistrationAuthenticationFallbackType GetAuthenticationFallback()
 		{
 			SilentRegistrationAuthenticationFallbackType silentRegistrationAuthenticationFallbackType;
@@ -155,13 +155,13 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return silentRegistrationAuthenticationFallbackType;
 		}
 
-		// Token: 0x06000019 RID: 25 RVA: 0x00002C2B File Offset: 0x00000E2B
+
 		public bool TryGetCloudType(out CloudType cloudType)
 		{
 			return this.TryGetEnumValue<CloudType>(SilentRegistrationParameterType.CloudType, SilentRegistrationErrorCodes.InvalidCloudType, out cloudType);
 		}
 
-		// Token: 0x0600001A RID: 26 RVA: 0x00002C38 File Offset: 0x00000E38
+
 		public bool TryGetJoinGroupParameters(out Guid groupId, out SecureString password)
 		{
 			groupId = default(Guid);
@@ -185,7 +185,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x0600001B RID: 27 RVA: 0x00002D34 File Offset: 0x00000F34
+
 		private bool TryGetCommonHostedParameters(out Uri serviceUri, out string vmResourceId, out SecureString miAuthToken)
 		{
 			serviceUri = null;
@@ -208,7 +208,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x0600001C RID: 28 RVA: 0x00002E0C File Offset: 0x0000100C
+
 		public bool TryGetAADJoinParameters(out Uri serviceUri, out string vmResourceId, out SecureString miAuthToken, out string tenantId)
 		{
 			serviceUri = null;
@@ -226,7 +226,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.TenantIdentifier).IsSet && this.TryGetValue(SilentRegistrationParameterType.TenantIdentifier, out tenantId);
 		}
 
-		// Token: 0x0600001D RID: 29 RVA: 0x00002EA8 File Offset: 0x000010A8
+
 		public bool TryGetRegisterHostedParameters(out Uri serviceUri, out string vmResourceId, out SecureString miAuthToken, out SecureString groupPassword)
 		{
 			serviceUri = null;
@@ -250,7 +250,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x0600001E RID: 30 RVA: 0x00002F48 File Offset: 0x00001148
+
 		public bool TryGetClientSessionId(out string clientSessionId)
 		{
 			SilentRegistrationParameter silentRegistrationParameter = this._parameters.FirstOrDefault((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.ClientSessionId);
@@ -268,7 +268,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x0600001F RID: 31 RVA: 0x00002FC8 File Offset: 0x000011C8
+
 		public bool TryGetCorrelationId(out string correlationId)
 		{
 			SilentRegistrationParameter silentRegistrationParameter = this._parameters.FirstOrDefault((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.CorrelationId);
@@ -286,7 +286,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x06000020 RID: 32 RVA: 0x00003048 File Offset: 0x00001248
+
 		private static SecureString ReadSecureInput(string commandName)
 		{
 			if (Console.IsInputRedirected)
@@ -319,7 +319,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return secureString;
 		}
 
-		// Token: 0x06000021 RID: 33 RVA: 0x00003100 File Offset: 0x00001300
+
 		private void ParseParameters(List<string> args)
 		{
 			SilentRegistrationParameter silentRegistrationParameter = null;
@@ -382,7 +382,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			}
 		}
 
-		// Token: 0x06000022 RID: 34 RVA: 0x00003328 File Offset: 0x00001528
+
 		private void ValidateAndCompleteCommand(SilentRegistrationParameter currentCommand)
 		{
 			if (currentCommand == null)
@@ -401,7 +401,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			currentCommand.IsSet = true;
 		}
 
-		// Token: 0x06000023 RID: 35 RVA: 0x000033D4 File Offset: 0x000015D4
+
 		private bool TryGetEnumValue<T>(SilentRegistrationParameterType parameterType, SilentRegistrationErrorCodes errorCode, out T enumValue) where T : struct
 		{
 			enumValue = default(T);
@@ -420,7 +420,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x06000024 RID: 36 RVA: 0x00003488 File Offset: 0x00001688
+
 		private bool TryGetUriValue(SilentRegistrationParameterType parameterType, out Uri value)
 		{
 			value = null;
@@ -436,7 +436,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x06000025 RID: 37 RVA: 0x000034D8 File Offset: 0x000016D8
+
 		private bool TryGetValue(SilentRegistrationParameterType parameterType, out string value)
 		{
 			value = null;
@@ -453,7 +453,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x06000026 RID: 38 RVA: 0x00003554 File Offset: 0x00001754
+
 		private bool TryGetSecureValue(SilentRegistrationParameterType parameterType, out SecureString value)
 		{
 			value = null;
@@ -470,22 +470,22 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			return true;
 		}
 
-		// Token: 0x04000003 RID: 3
+
 		private const string MachineRegistrationFwdLink = "https://go.microsoft.com/fwlink/?linkid=2165141";
 
-		// Token: 0x04000004 RID: 4
+
 		private const char ValueDelimiter = '"';
 
-		// Token: 0x04000005 RID: 5
+
 		private HashSet<SilentRegistrationParameterType> _parsedParameters = new HashSet<SilentRegistrationParameterType>();
 
-		// Token: 0x04000006 RID: 6
+
 		private static readonly string[] PrefixesArg = new string[] { "-", "/" };
 
-		// Token: 0x04000007 RID: 7
+
 		private IList<string> _errors = new List<string>();
 
-		// Token: 0x04000008 RID: 8
+
 		private List<SilentRegistrationParameter> _parameters = new List<SilentRegistrationParameter>
 		{
 			new SilentRegistrationParameter

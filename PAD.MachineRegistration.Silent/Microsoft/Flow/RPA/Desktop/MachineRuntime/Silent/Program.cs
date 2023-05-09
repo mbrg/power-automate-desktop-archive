@@ -22,10 +22,10 @@ using Microsoft.Flow.RPAPAD.Common.Instrumentation;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 {
-	// Token: 0x02000002 RID: 2
+
 	internal class Program
 	{
-		// Token: 0x06000001 RID: 1 RVA: 0x00002050 File Offset: 0x00000250
+
 		private static async Task Main(string[] args)
 		{
 			SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
@@ -60,7 +60,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			}
 		}
 
-		// Token: 0x06000002 RID: 2 RVA: 0x00002094 File Offset: 0x00000294
+
 		private static void InitCorrelationInformations(SilentRegistrationCommands silentRegistrationCommands)
 		{
 			string text;
@@ -69,7 +69,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			RequestCorrelationContext.Current.ClientSessionId = (silentRegistrationCommands.TryGetClientSessionId(out text2) ? text2 : Guid.NewGuid().ToString());
 		}
 
-		// Token: 0x06000003 RID: 3 RVA: 0x000020F8 File Offset: 0x000002F8
+
 		private static void ExitIfNotFirstInstance()
 		{
 			if (!ServiceLocator.Current.GetInstance<ISingleApplicationInstanceService>().IsFirstInstance())
@@ -80,7 +80,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			}
 		}
 
-		// Token: 0x06000004 RID: 4 RVA: 0x00002154 File Offset: 0x00000354
+
 		private static void LogAndDisplayError(Exception exception)
 		{
 			if (exception == null)
@@ -103,13 +103,13 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			}));
 		}
 
-		// Token: 0x06000005 RID: 5 RVA: 0x00002228 File Offset: 0x00000428
+
 		private static async Task PerformRegistrationStateOperationAsync()
 		{
 			await ServiceLocator.Current.GetInstance<ISilentRegistrationOperations>().GetMachineRegistrationStateAsync();
 		}
 
-		// Token: 0x06000006 RID: 6 RVA: 0x00002264 File Offset: 0x00000464
+
 		private static async Task PerformRegistrationWorkAsync(SilentRegistrationCommands silentRegistrationCommands)
 		{
 			ISilentRegistrationOperations silentRegistrationOperations = ServiceLocator.Current.GetInstance<ISilentRegistrationOperations>();
@@ -174,7 +174,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			throw new SilentRegistrationException(SilentRegistrationErrorCodes.OperationNotSupported.ToString(), string.Format("Invalid operation '{0}' to execute. See -help above.", silentRegistrationCommands.OperationToExecute), null);
 		}
 
-		// Token: 0x06000007 RID: 7 RVA: 0x000022A8 File Offset: 0x000004A8
+
 		private static void SetupAuthenticationService(SilentRegistrationCommands silentRegistrationCommands)
 		{
 			CloudType cloudType;
@@ -222,16 +222,16 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 			userAccountInfo.SetAccountInfo(text6, text7, empty, cloudInfo2, tenantIdentifier, AccountType.Undefined, flag2);
 		}
 
-		// Token: 0x06000009 RID: 9 RVA: 0x000023DC File Offset: 0x000005DC
+
 		private static void <Main>(string[] args)
 		{
 			Program.Main(args).GetAwaiter().GetResult();
 		}
 
-		// Token: 0x04000001 RID: 1
+
 		private static ILogger<Program> _logger;
 
-		// Token: 0x04000002 RID: 2
+
 		private const int EXIT_CODE_ERROR = -1;
 	}
 }

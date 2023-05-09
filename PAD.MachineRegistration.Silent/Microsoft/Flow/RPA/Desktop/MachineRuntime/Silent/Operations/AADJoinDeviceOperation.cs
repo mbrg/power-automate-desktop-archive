@@ -13,10 +13,10 @@ using PAD.MachineRegistration.Silent.ProvisioningServiceClient;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 {
-	// Token: 0x0200000C RID: 12
+
 	public class AADJoinDeviceOperation : IAADJoinDeviceOperation
 	{
-		// Token: 0x06000041 RID: 65 RVA: 0x000037CC File Offset: 0x000019CC
+
 		public AADJoinDeviceOperation(ILogger<AADJoinDeviceOperation> logger, IDeviceInfoUtil deviceInfoUtil, IProvisioningServiceClient psClient)
 		{
 			this._logger = logger;
@@ -24,7 +24,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			this._psClient = psClient;
 		}
 
-		// Token: 0x06000042 RID: 66 RVA: 0x000037EC File Offset: 0x000019EC
+
 		public async Task<AADJoinDeviceOperationResult> AADJoinDeviceAsync(Uri serviceUri, SecureString miAuthTokenSecure, string vmResourceId, string tenantId, Guid machineId)
 		{
 			if (!this._deviceInfoUtil.Init())
@@ -52,7 +52,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return aadjoinDeviceOperationResult;
 		}
 
-		// Token: 0x06000043 RID: 67 RVA: 0x0000385C File Offset: 0x00001A5C
+
 		private void JoinPrecreatedDevice(string tenantId, AADDevicePreprovisioningInfo devicePreprovisioningInfo, AADJoinHostedMachineResponse joinResponse)
 		{
 			if (!this._deviceInfoUtil.JoinPreprovisionedDevice(devicePreprovisioningInfo.JoinCookie, joinResponse.ChallengeToken, tenantId, RequestCorrelationContext.Current.CorrelationId))
@@ -62,7 +62,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			this._logger.Info("JoinPrecreatedDevice", LogEvent.MachineRegistration.AADJoin, string.Concat(new string[] { "Successfully AAD joined preprovisioned deviceId ", joinResponse.DeviceId, " on tenantId ", tenantId, "." }), -1L, Array.Empty<LogData>());
 		}
 
-		// Token: 0x06000044 RID: 68 RVA: 0x000038EC File Offset: 0x00001AEC
+
 		private async Task<AADJoinHostedMachineResponse> PrecreateDeviceAsync(Uri serviceUri, SecureString miAuthTokenSecure, string vmResourceId, AADDevicePreprovisioningInfo devicePreprovisioningInfo, Guid machineId)
 		{
 			AADJoinDeviceOperation.<>c__DisplayClass6_0 CS$<>8__locals1 = new AADJoinDeviceOperation.<>c__DisplayClass6_0();
@@ -97,7 +97,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return CS$<>8__locals1.joinResponse;
 		}
 
-		// Token: 0x06000045 RID: 69 RVA: 0x0000395C File Offset: 0x00001B5C
+
 		private AADDevicePreprovisioningInfo GetPreprovisionBlob(string tenantId)
 		{
 			AADDevicePreprovisioningInfo devicePreprovisioningBlob = this._deviceInfoUtil.GetDevicePreprovisioningBlob(tenantId, RequestCorrelationContext.Current.CorrelationId);
@@ -111,7 +111,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return devicePreprovisioningBlob;
 		}
 
-		// Token: 0x06000046 RID: 70 RVA: 0x00003A30 File Offset: 0x00001C30
+
 		private AADJoinDeviceOperationResult HandleAadJoinedDevice(string tenantId)
 		{
 			AADDeviceJoinInfo deviceJoinState = this._deviceInfoUtil.GetDeviceJoinState();
@@ -130,13 +130,13 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			};
 		}
 
-		// Token: 0x04000062 RID: 98
+
 		private readonly ILogger<AADJoinDeviceOperation> _logger;
 
-		// Token: 0x04000063 RID: 99
+
 		private readonly IDeviceInfoUtil _deviceInfoUtil;
 
-		// Token: 0x04000064 RID: 100
+
 		private readonly IProvisioningServiceClient _psClient;
 	}
 }

@@ -10,17 +10,17 @@ using Microsoft.Flow.RPA.RegistrationContract;
 
 namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 {
-	// Token: 0x02000014 RID: 20
+
 	public class RegisterHostedMachineOperation : IRegisterHostedMachineOperation
 	{
-		// Token: 0x06000065 RID: 101 RVA: 0x00003D42 File Offset: 0x00001F42
+
 		public RegisterHostedMachineOperation(ILogger<RegisterHostedMachineOperation> logger, IUIFlowServicePipe uIFlowServicePipe)
 		{
 			this._logger = logger;
 			this._uIFlowServicePipe = uIFlowServicePipe;
 		}
 
-		// Token: 0x06000066 RID: 102 RVA: 0x00003D58 File Offset: 0x00001F58
+
 		public async Task<RegisterHostedMachineResponse> RegisterHostedMachineAsync(Uri serviceUri, string vmResourceId, SecureString miAuthTokenSecure, SecureString groupPasswordSecure, string machineName, string machineDescription)
 		{
 			RegisterHostedMachineOperation.<>c__DisplayClass3_0 CS$<>8__locals1 = new RegisterHostedMachineOperation.<>c__DisplayClass3_0();
@@ -56,10 +56,10 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			return registerHostedMachineResponse2;
 		}
 
-		// Token: 0x04000075 RID: 117
+
 		private readonly ILogger<RegisterHostedMachineOperation> _logger;
 
-		// Token: 0x04000076 RID: 118
+
 		private readonly IUIFlowServicePipe _uIFlowServicePipe;
 	}
 }
