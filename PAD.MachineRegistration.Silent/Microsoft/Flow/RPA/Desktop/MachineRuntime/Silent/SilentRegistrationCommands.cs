@@ -112,6 +112,12 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 		}
 
 
+		public string GetB64SerializedRegisterRpaBoxRequest()
+		{
+			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.RegisterRpaBoxB64SerializedRequest).Values.FirstOrDefault<string>();
+		}
+
+
 		public string GetRegistrationMachineDescriptionParameter()
 		{
 			return this._parameters.First((SilentRegistrationParameter s) => s.Type == SilentRegistrationParameterType.RegistrationMachineDescription).Values.FirstOrDefault<string>();
@@ -335,7 +341,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 						{
 							this.ValidateAndCompleteCommand(silentRegistrationParameter);
 						}
-						silentRegistrationParameter = this._parameters.FirstOrDefault((SilentRegistrationParameter p) => p.Name == currentArg.ToLowerInvariant());
+						silentRegistrationParameter = this._parameters.FirstOrDefault((SilentRegistrationParameter p) => string.Equals(p.Name, currentArg, StringComparison.InvariantCultureIgnoreCase));
 						if (silentRegistrationParameter == null)
 						{
 							this._errors.Add("Error: parameter '" + currentArg + "' doesn't exist.");
@@ -651,6 +657,18 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent
 				Type = SilentRegistrationParameterType.Recover,
 				OperationType = SilentRegistrationOperationType.Recover,
 				Name = "recover"
+			},
+			new SilentRegistrationParameter
+			{
+				Type = SilentRegistrationParameterType.RegisterRpaBox,
+				OperationType = SilentRegistrationOperationType.RegisterRpaBox,
+				Name = "registerRpaBox"
+			},
+			new SilentRegistrationParameter
+			{
+				Type = SilentRegistrationParameterType.RegisterRpaBoxB64SerializedRequest,
+				Name = "registerRpaBoxPayload",
+				RequiredValuesCount = 1
 			}
 		};
 	}

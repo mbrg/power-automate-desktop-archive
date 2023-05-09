@@ -38,5 +38,8 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 
 		Task RecoverMachineAsync();
+
+
+		Task RegisterRpaBoxAsync(string b64SerializedRegisterRpaBoxRequest);
 	}
 }

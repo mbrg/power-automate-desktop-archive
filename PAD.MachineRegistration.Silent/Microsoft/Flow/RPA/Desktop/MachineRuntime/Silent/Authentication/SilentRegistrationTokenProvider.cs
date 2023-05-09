@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Flow.RPA.Desktop.Console.Core.ApplicationRoot;
 using Microsoft.Flow.RPA.Desktop.Console.Core.Services;
 using Microsoft.Flow.RPA.Desktop.Console.Core.UserAccount;
-using Microsoft.Flow.RPA.Desktop.Shared.Clients.TenantDiscovery.Entities;
+using Microsoft.Flow.RPA.Desktop.MachineRuntime.Core.ApplicationRoot;
+using Microsoft.Flow.RPA.Desktop.Shared.Common.CloudInfoEntities;
 using Microsoft.Flow.RPA.Desktop.Shared.MsAccountAuthenticator;
 using Microsoft.Flow.RPA.Desktop.Shared.MsAccountAuthenticator.Entities;
 
@@ -15,10 +15,10 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Authentication
 	public class SilentRegistrationTokenProvider : ITokenProvider
 	{
 
-		public SilentRegistrationTokenProvider(IMicrosoftAuthenticationServiceManager microsoftAuthenticationServiceManager, IConsoleRoot consoleRoot)
+		public SilentRegistrationTokenProvider(IMicrosoftAuthenticationServiceManager microsoftAuthenticationServiceManager, IMachineRuntimeRoot machineRuntimeRoot)
 		{
 			this._microsoftAuthenticationServiceManager = microsoftAuthenticationServiceManager;
-			this._userAccountInfo = consoleRoot.UserAccountInfo;
+			this._userAccountInfo = machineRuntimeRoot.UserAccountInfo;
 		}
 
 
@@ -77,7 +77,9 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Authentication
 				{
 					new AudiencePermissions(cloudInfo.Flow.Audience, new string[] { cloudInfo.Flow.FlowReadAllPermission })
 				};
-				text = (await this._microsoftAuthenticationServiceManager.Service.GetAccessTokenByIntegratedWindowsAuthAsync(enumerable, this._userAccountInfo.Email, cancellationToken).ConfigureAwait(false)).AccessToken;
+				MicrosoftAuthenticationResult microsoftAuthenticationResult = await this._microsoftAuthenticationServiceManager.Service.GetAccessTokenByIntegratedWindowsAuthAsync(enumerable, this._userAccountInfo.Email, cancellationToken).ConfigureAwait(false);
+				this._userAccountInfo.SetAccountTenantId(microsoftAuthenticationResult.TenantId);
+				text = microsoftAuthenticationResult.AccessToken;
 			}
 			return text;
 		}

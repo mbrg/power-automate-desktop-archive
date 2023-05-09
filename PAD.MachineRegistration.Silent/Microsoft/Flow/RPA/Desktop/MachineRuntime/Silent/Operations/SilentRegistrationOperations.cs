@@ -7,24 +7,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.Flow.RPA.Desktop.Common.Core.Domain.Machine.Enums;
 using Microsoft.Flow.RPA.Desktop.Common.Services.Registry;
+using Microsoft.Flow.RPA.Desktop.Console.Application.Persistence.Repositories.Environments;
 using Microsoft.Flow.RPA.Desktop.Console.Application.ServicePlan;
 using Microsoft.Flow.RPA.Desktop.Console.Application.ServicePlan.Commands;
-using Microsoft.Flow.RPA.Desktop.Console.Core.ApplicationRoot;
 using Microsoft.Flow.RPA.Desktop.Console.Core.Environment;
 using Microsoft.Flow.RPA.Desktop.Console.Core.Services;
 using Microsoft.Flow.RPA.Desktop.Console.Core.UserAccount;
-using Microsoft.Flow.RPA.Desktop.Console.Persistence.Core;
-using Microsoft.Flow.RPA.Desktop.Console.Persistence.Core.Repositories;
+using Microsoft.Flow.RPA.Desktop.MachineRuntime.Application.Extensions;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Application.Machine;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Application.Machine.Commands;
+using Microsoft.Flow.RPA.Desktop.MachineRuntime.Application.Persistence;
+using Microsoft.Flow.RPA.Desktop.MachineRuntime.Core.ApplicationRoot;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Core.Machine;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Authentication;
 using Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.SilentRegistrationCommandParameters;
 using Microsoft.Flow.RPA.Desktop.Shared.Clients.Common.Repos.Cds;
 using Microsoft.Flow.RPA.Desktop.Shared.Clients.DataClients.Cds;
 using Microsoft.Flow.RPA.Desktop.Shared.Clients.DataClients.Dto;
-using Microsoft.Flow.RPA.Desktop.Shared.Clients.TenantDiscovery.Entities;
+using Microsoft.Flow.RPA.Desktop.Shared.Common.CloudInfoEntities;
 using Microsoft.Flow.RPA.Desktop.Shared.Common.Extensions;
 using Microsoft.Flow.RPA.Desktop.Shared.Logging;
 using Microsoft.Flow.RPA.Desktop.Shared.Logging.Common.Data;
@@ -43,17 +45,16 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 	public class SilentRegistrationOperations : ISilentRegistrationOperations
 	{
 
-		public SilentRegistrationOperations(IUnitOfWork unitOfWork, IMediator mediator, IStorageTypeService storageTypeService, IMachineRegistrationManager machineRegistrationManager, ILoggerContext loggerContext, ICdsClient cdsClient, IMachineManagementCdsClient machineManagementCdsClient, ITokenProvider tokenProvider, IMicrosoftAuthenticationServiceManager microsoftAuthenticationServiceManager, IConsoleRoot consoleRoot, IRegistryValuesService registryValuesService, ILogger<SilentRegistrationOperations> logger, IRegisterHostedMachineOperation registerHostedMachineOperation, IAADJoinDeviceOperation aadJoinDeviceOperation)
+		public SilentRegistrationOperations(IMachineRuntimeUnitOfWork unitOfWork, IMediator mediator, IStorageTypeService storageTypeService, IMachineRegistrationManager machineRegistrationManager, ILoggerContext loggerContext, ICdsClient cdsClient, ITokenProvider tokenProvider, IMicrosoftAuthenticationServiceManager microsoftAuthenticationServiceManager, IMachineRuntimeRoot machineRuntimeRoot, IRegistryValuesService registryValuesService, ILogger<SilentRegistrationOperations> logger, IRegisterHostedMachineOperation registerHostedMachineOperation, IAADJoinDeviceOperation aadJoinDeviceOperation)
 		{
 			this._environmentsRepositoryProxy = unitOfWork.Environments;
 			this._mediator = mediator;
 			this._machineRegistrationManager = machineRegistrationManager;
 			this._loggerContext = loggerContext;
 			this._cdsClient = cdsClient;
-			this._machineManagementCdsClient = machineManagementCdsClient;
 			this._tokenProvider = tokenProvider;
 			this._microsoftAuthenticationServiceManager = microsoftAuthenticationServiceManager;
-			this._userAccountInfo = consoleRoot.UserAccountInfo;
+			this._userAccountInfo = machineRuntimeRoot.UserAccountInfo;
 			this._registryValuesService = registryValuesService;
 			this._logger = logger;
 			this._registerHostedMachineOperation = registerHostedMachineOperation;
@@ -64,7 +65,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 		public async Task TryLogonAsync(SilentRegistrationAuthenticationFallbackType silentRegistrationAuthenticationFallbackType)
 		{
-			SilentRegistrationOperations.<>c__DisplayClass22_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass22_0();
+			SilentRegistrationOperations.<>c__DisplayClass21_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass21_0();
 			CS$<>8__locals1.<>4__this = this;
 			CS$<>8__locals1.silentRegistrationAuthenticationFallbackType = silentRegistrationAuthenticationFallbackType;
 			await this._logger.TraceOperationAsync("TryLogonAsync", new Func<Task>(CS$<>8__locals1.<TryLogonAsync>g__TryLogonInternalAsync|0), null, null, Array.Empty<LogData>());
@@ -73,13 +74,13 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 		public async Task JoinMachineGroupAsync(Guid groupId, SecureString password)
 		{
-			SilentRegistrationOperations.<>c__DisplayClass23_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass23_0();
+			SilentRegistrationOperations.<>c__DisplayClass22_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass22_0();
 			CS$<>8__locals1.<>4__this = this;
 			CS$<>8__locals1.groupId = groupId;
 			CS$<>8__locals1.password = password;
 			CS$<>8__locals1.groupId.ThrowIfEmpty("groupId", null);
 			CS$<>8__locals1.password.ThrowIfNull("password", null);
-			if (this._machineState != RegistrationState.Registered)
+			if (!this._machineState.IsRegisteredState())
 			{
 				throw new SilentRegistrationException(SilentRegistrationErrorCodes.FailJoinGroup.ToString(), "You cannot join a group if the machine is not registered in an environment.", null);
 			}
@@ -93,7 +94,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 		public async Task RegisterMachineAsync(string machineName, string machineDescription, bool overrideExistingRegistration)
 		{
-			SilentRegistrationOperations.<>c__DisplayClass24_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass24_0();
+			SilentRegistrationOperations.<>c__DisplayClass23_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass23_0();
 			CS$<>8__locals1.overrideExistingRegistration = overrideExistingRegistration;
 			CS$<>8__locals1.<>4__this = this;
 			CS$<>8__locals1.machineName = machineName;
@@ -104,7 +105,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 		public async Task RegisterHostedMachineAsync(Uri serviceUri, string vmResourceId, SecureString miAuthToken, SecureString groupPassword, string machineName, string machineDescription)
 		{
-			SilentRegistrationOperations.<>c__DisplayClass25_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass25_0();
+			SilentRegistrationOperations.<>c__DisplayClass24_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass24_0();
 			CS$<>8__locals1.<>4__this = this;
 			CS$<>8__locals1.serviceUri = serviceUri;
 			CS$<>8__locals1.vmResourceId = vmResourceId;
@@ -113,6 +114,15 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 			CS$<>8__locals1.machineName = machineName;
 			CS$<>8__locals1.machineDescription = machineDescription;
 			await this._logger.TraceOperationAsync("RegisterHostedMachineAsync", new Func<Task>(CS$<>8__locals1.<RegisterHostedMachineAsync>g__RegisterHostedMachineInternalAsync|0), null, null, Array.Empty<LogData>());
+		}
+
+
+		public async Task RegisterRpaBoxAsync(string b64SerializedRegisterRpaBoxRequest)
+		{
+			SilentRegistrationOperations.<>c__DisplayClass25_0 CS$<>8__locals1 = new SilentRegistrationOperations.<>c__DisplayClass25_0();
+			CS$<>8__locals1.b64SerializedRegisterRpaBoxRequest = b64SerializedRegisterRpaBoxRequest;
+			CS$<>8__locals1.<>4__this = this;
+			await this._logger.TraceOperationAsync("RegisterRpaBoxAsync", new Func<Task>(CS$<>8__locals1.<RegisterRpaBoxAsync>g__RegisterRpaBoxInternalAsync|0), null, null, Array.Empty<LogData>());
 		}
 
 
@@ -255,20 +265,16 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 		}
 
 
-		private async Task CheckRelayConnectionStateAsync(SilentRegistrationOperationType operationType)
+		private void CheckRelayConnectionStateAsync(SilentRegistrationOperationType operationType)
 		{
-			if (this._machineState == RegistrationState.Registered)
+			if (!this._machineState.IsRegisteredState())
 			{
-				RelayConnectionState relayConnectionState;
-				Enum.TryParse<RelayConnectionState>(this._currentRegistrationStatus.RelayConnectionState, out relayConnectionState);
-				if (relayConnectionState == RelayConnectionState.Connected)
-				{
-					await this._mediator.Send<DFLHeartbeatMachineCommandResult>(new DFLHeartbeatMachineCommand(new Uri(this._currentRegisteredEnvironment.ApiUrl), this._currentRegisteredEnvironment.Id, this._userAccountInfo.TenantId, this._currentMachineGroupId.ToString()), default(CancellationToken));
-				}
-				else if (operationType != SilentRegistrationOperationType.Recover)
-				{
-					throw new SilentRegistrationException(SilentRegistrationErrorCodes.RelayConnectionStateNotConnected.ToString(), "Your machine is not connected to the relay. Verify your network connection or recover your machine.\nUse -recover command to do so.", null);
-				}
+				return;
+			}
+			RelayConnectionState relayConnectionState;
+			if (Enum.TryParse<RelayConnectionState>(this._currentRegistrationStatus.RelayConnectionState, out relayConnectionState) && relayConnectionState != RelayConnectionState.Connected && operationType != SilentRegistrationOperationType.Recover)
+			{
+				throw new SilentRegistrationException(SilentRegistrationErrorCodes.RelayConnectionStateNotConnected.ToString(), "Your machine is not connected. Verify your network connection or recover your machine.\nUse -recover command to do so.", null);
 			}
 		}
 
@@ -302,20 +308,29 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 				RegistrationErrorCode code = result.Error.Code;
 				if (code != RegistrationErrorCode.MachineAlreadyRegistered)
 				{
-					if (code != RegistrationErrorCode.NoPayGoNoLicenseError)
+					switch (code)
 					{
-						text2 = (string.IsNullOrWhiteSpace(result.Error.Message) ? text2 : result.Error.Message);
-					}
-					else
-					{
+					case RegistrationErrorCode.NoPayGoNoLicenseError:
 						text2 = "Cannot register your machine in this environment. You must have a valid per user plan with attended RPA or your environment must be pay-as-you-go.";
+						goto IL_BD;
+					case RegistrationErrorCode.UnauthorizedTenantSwitching:
+						text2 = "Registering in this environment would change your machine's tenant which is disallowed by default. Check https://go.microsoft.com/fwlink/?linkid=2204956 to learn why and how to override the default behavior.";
+						goto IL_BD;
+					case RegistrationErrorCode.UnauthorizedRegistrationToUnjoinedTenant:
+						text2 = "You are trying to register to a tenant that doesn't match your machine's AAD tenant, which is disallowed by default. Check https://go.microsoft.com/fwlink/?linkid=2204956 to learn why and how to override the default behavior.";
+						goto IL_BD;
+					case RegistrationErrorCode.UnauthorizedRegistrationToNonAllowListedTenant:
+						text2 = "You are trying to register to an environment that isn't in the registration tenant allow-list of this machine. Check https://go.microsoft.com/fwlink/?linkid=2204956 to learn more about the registration tenant allow-list.";
+						goto IL_BD;
 					}
+					text2 = (string.IsNullOrWhiteSpace(result.Error.Message) ? text2 : result.Error.Message);
 				}
 				else
 				{
 					text2 = "The machine is already registered. Please specify '-force' parameter to override existing registration.";
 				}
 			}
+			IL_BD:
 			throw new SilentRegistrationException(text, text2, result.UnexpectedException);
 		}
 
@@ -351,7 +366,7 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 					}
 				}));
 			}
-			if (this._machineState == RegistrationState.Registered)
+			if (this._machineState.IsRegisteredState())
 			{
 				stringBuilder.Append(System.Environment.NewLine + "MachineDetails:" + System.Environment.NewLine);
 				if (response.MachineDetails == null)
@@ -560,9 +575,6 @@ namespace Microsoft.Flow.RPA.Desktop.MachineRuntime.Silent.Operations
 
 
 		private readonly ICdsClient _cdsClient;
-
-
-		private readonly IMachineManagementCdsClient _machineManagementCdsClient;
 
 
 		private readonly ITokenProvider _tokenProvider;
